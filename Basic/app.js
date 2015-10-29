@@ -28,6 +28,13 @@
         };
     });
 
+    app.directive('productTitle', function() {
+        return {
+            restrict : 'E',   // E stands for element 
+            templateUrl : 'product-title.html'  // url for a template
+        };
+    });
+
     var gems = [
         {
             name : 'Dodecahedron',

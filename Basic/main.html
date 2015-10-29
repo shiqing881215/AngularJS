@@ -18,11 +18,9 @@
         <div class="list-group">
             <!--  Product Container  -->
             <div class="list-group-item" ng-repeat="product in store.products">  <!-- ng-repeat allow you to iterate -->
-                <h3>
-                    {{product.name}}
-                    <em class="pull-right"> {{product.price | currency}} </em>
-                    <img class="gemImage img img-circle img-thumbnail center-block" ng-src="{{ product.images[0].full }}">
-                </h3>
+                <!-- <h3 ng-include="'product-title.html'"></h3> -->  <!-- ng-include will not work in chrome for local file due to cross domain issue -->
+                <product-title></product-title>  <!-- custom directive -->
+                <img class="gemImage img img-circle img-thumbnail center-block" ng-src="{{ product.images[0].full }}">
 
                 <!-- Product Tabs  -->
                 <section ng-controller="PanelController as panel">
@@ -66,7 +64,7 @@
 
                         <!--  Review Form -->
                         <form name="reviewForm" ng-controller="ReviewController as reviewCtrl"
-                                                ng-submit="reviewCtrl.addReview(product)">
+                                                ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>  <!-- turn off HTML default validate -->
 
                             <!--  Live Preview -->
                             <blockquote>
@@ -78,15 +76,15 @@
                             <!--  Review Form -->
                             <h4>Submit a Review</h4>
                             <fieldset class="form-group">
-                                <select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" title="Stars">
+                                <select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" title="Stars" required>
                                   <option value="">Rate the Product</option>
                                 </select>
                             </fieldset>
                             <fieldset class="form-group">
-                                <textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="Write a short review of the product..." title="Review"></textarea>
+                                <textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="Write a short review of the product..." title="Review" required></textarea>
                             </fieldset>
                             <fieldset class="form-group">
-                                <input ng-model="reviewCtrl.review.author" type="email" class="form-control" placeholder="jimmyDean@example.org" title="Email" />
+                                <input ng-model="reviewCtrl.review.author" type="email" class="form-control" placeholder="jimmyDean@example.org" title="Email" required/>
                             </fieldset>
                             <fieldset class="form-group">
                                 <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
