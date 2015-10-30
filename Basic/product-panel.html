@@ -1,0 +1,33 @@
+<!-- Product Tabs  -->
+<section>
+    <ul class="nav nav-pills">
+        <li ng-class="{active : panel.isSelected(1)}"> 
+            <a href ng-click="panel.selectTab(1)">Description</a>
+        </li>
+        <li ng-class="{active : panel.isSelected(2)}"> 
+            <a href ng-click="panel.selectTab(2)">Specifications</a>
+        </li>
+        <li ng-class="{active : panel.isSelected(3)}"> 
+            <a href ng-click="panel.selectTab(3)">Reviews</a>
+        </li>
+    </ul>
+
+    <!-- Below three panels show three ways to organize code -->
+
+    <!-- First way : use ng-include to import -->
+    <!-- ng-include will not work in chrome for local file due to cross domain issue -->
+    <!--  Description Tab's Content  -->   
+    <div class="panel" ng-show="panel.isSelected(1)" ng-include="'product-description.html'">
+    </div>
+
+    <!-- Second way : use attribute custom directive -->
+    <!--  Spec Tab's Content  -->
+    <div class="panel" ng-show="panel.isSelected(2)" product-spec>
+    </div>
+
+    <!-- Third way : use element custom directive -->
+    <!--  Review Tab's Content  -->
+    <div class="panel" ng-show="panel.isSelected(3)">
+        <product-review></product-review>
+    </div>
+</section>

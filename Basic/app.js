@@ -1,21 +1,9 @@
 (function() {
     // Firs param is app name, and second param is dependencies
-    var app = angular.module('gemStore', []);
+    var app = angular.module('gemStore', ['store-products']);
 
     app.controller('StoreController', function() {
         this.products = gems;
-    });
-
-    app.controller('PanelController', function() {
-        this.tab = 1;  // Initialization
-
-        this.selectTab = function(selectedTab) {
-            this.tab = selectedTab;
-        };
-
-        this.isSelected = function(checkTab) {
-            return this.tab === checkTab;
-        }
     });
 
     app.controller('ReviewController', function() {
@@ -25,13 +13,6 @@
         this.addReview = function(product) {
             product.reviews.push(this.review);
             this.review = {};
-        };
-    });
-
-    app.directive('productTitle', function() {
-        return {
-            restrict : 'E',   // E stands for element 
-            templateUrl : 'product-title.html'  // url for a template
         };
     });
 
